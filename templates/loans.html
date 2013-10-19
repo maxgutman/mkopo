@@ -17,6 +17,10 @@
 
             <div>
                 <h3>View Groups</h3><br />
+                <div style="display:none" class="alert alert-info">
+	            	<button type="button" class="close close2 fui-cross"></button>
+	            	Your message has been sent.
+	            </div>
 
                 {% for group in user.groups %}
                 <table class="rwd-table">
@@ -44,7 +48,7 @@
                                 {% if user.id == n_user.id %}
                                     <button class="btn btn-mini disabled">{{ n_user.name }}</button>
                                 {% else %}
-                                    <button class="btn btn-mini btn-primary">{{ n_user.name }}</button>
+                                    <button class="btn btn-mini user-btn btn-primary">{{ n_user.name }}</button>
                                 {% endif %}
                             </td>
 
@@ -67,7 +71,7 @@
                             </td>
                             <td width="250" style="text-align: right">
                                 Total&nbsp;
-&nbsp;
+								&nbsp;
 
                             </td>
                             <td width=80>$1025.00/$1550.00</td>
@@ -87,12 +91,25 @@
                 <i class="fui-arrow-left"></i>Back
             </a>
             <a href="/create"class="btn btn-primary pull-right">
-                <i class="fui-arrow-right"></i>Create Group
+                <i class="fui-arrow-right"></i>Create New Group
             </a>
             <div style="clear:both"></div>
             <br/>
     </div>
-
+	
+	<div class="modal" style="display:none; position: absolute; top: 200px; left: auto; right: auto; margin: 0 auto 20px; z-index: 1; width: 90%;">
+        <div class="modal-header">
+          <button type="button" class="close fui-cross" data-dismiss="modal" aria-hidden="true"></button>
+          <div class="modal-header-c"></div>
+        </div>
+        <div class="modal-body">
+        	Send a message to his Facebook-account:
+          	<textarea rows="5"></textarea>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn send btn-wide btn-primary">Send</a>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -101,5 +118,23 @@
 
 
 {% include 'footer.html' %}
+<script>
+	$('.user-btn').click(function(){
+		var name = $(this).text();
+		$(".modal").show();
+		$(".modal-header-c").html('<h3><span class="fui-bubble mrm"></span>' + name + '</h3>')
+		$("textarea").val("");
+	});
+	$('.close').click(function(){
+		$('.modal').hide();
+	});
+	$('.close2').click(function(){
+		$('.alert').slideUp();
+	});
+	$('.send').click(function(){
+		$('.modal').hide();
+		$('.alert').slideDown();
+	});
+</script>
   </body>
 </html>
