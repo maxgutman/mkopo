@@ -12,54 +12,35 @@
     <div class="span10">
              <div>
                 <h3>Join Groups</h3>
-                <table class="rwd-table">
+                {% for invite_group in user.get_invite_groups() %}
+                <div class="alert-success alert invite{{ invite_group.id }}">
 
-                        <tr class="odd">
-                            <td>
-                                <h4>A new bike</h4>
-                                <div class="pull-left"><img width="100px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><h5>Alex</h5></div>
-                                <p>Hi {{ name }}, what's up? I really need some money to fix my bike so I can get to work tomorrow. I heard you also need some cash, so I thought we can help each other?<br>See you soon.</p>
-                                <div>
-                                    <h5>People in group:</h5>
-                                    <button class="btn btn-mini btn-primary">Alex: 300$</button> <button class="btn btn-mini btn-primary">Susann: 200$</button> <button class="btn btn-mini btn-primary">Rolf: 400$</button>
-                                </div>
-                                <div>
-                                    To loan money this group still needs to loan <span class="text-primary">500$</span> more, you current cap is <span class="text-danger">440$</span>.
-                                </div>
-                                <div class="pull-right"><button class="btn btn-primary"><span class="fui-check-inverted"></span>loan</button> <button class="btn btn-danger"><span class="fui-cross-inverted"></span>reject</button></div>
-                            </td>
-                        </tr>
-                        <tr class="even">
-                            <td>
-                                <h4>Fix roof</h4>
-                                <div class="pull-left"><img width="100px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><h5>Claus</h5></div>
-                                <p>Hi {{ name }}, I need your help! The roof of my house needs to get repaired, but I don't have neough money right now. Please help me to get a loan so I dont have to sit in a wet room.</p>
-                                <div>
-                                    <h5>People in group:</h5>
-                                    <button class="btn btn-mini btn-primary">Claus: 800$</button> <button class="btn btn-mini btn-primary">Lisa: 100$</button>
-                                </div>
-                                <div>
-                                    To loan money this group still needs to loan <span class="text-primary">200$</span> more, you current cap is <span class="text-primary">440$</span>.
-                                </div>
-                                <div class="pull-right"><button class="btn btn-primary"><span class="fui-check-inverted"></span>loan</button> <button class="btn btn-danger"><span class="fui-cross-inverted"></span>reject</button></div>
-                            </td>
-                        </tr>
-                        <tr class="odd">
-                            <td>
-                                <h4>Money for birthday</h4>
-                                <div class="pull-left"><img width="100px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><h5>Elsa</h5></div>
-                                <p>Yo {{ name }}, I want to throw a birthday-party, but cant afford the cake. Let's borrow some money together. You can spent it on a present for me ;)</p>
-                                <div>
-                                    <h5>People in group:</h5>
-                                    <button class="btn btn-mini btn-primary">Elsa: 200$</button>
-                                </div>
-                                <div>
-                                    To loan money this group still needs to loan <span class="text-primary">700$</span> more, you current cap is <span class="text-danger">440$</span>.
-                                </div>
-                                <div class="pull-right"><button class="btn btn-primary"><span class="fui-check-inverted"></span>loan</button> <button class="btn btn-danger"><span class="fui-cross-inverted"></span>reject</button></div>
-                            </td>
-                        </tr>
-                </table>
+                    <h4 style="margin-bottom: 10px">{{ invite_group.subject }}</h4>
+                    <div class="pull-left" style="width: 100px">
+                        <img width="64px" src="{{ invite_group._from_user.photo_url }}" /><br />
+                        <p>{{ invite_group._from_user.name }}</p></div>
+                    <p>{{ invite_group.message }}</p>
+                    <div>
+                        <h6>People in group:</h6>
+                        {% for _user in invite_group._group.users %}
+                            {% if _user != user %}
+                                <button class="btn btn-mini pull-left" style="margin: 4px">{{ _user.name }}</button>
+                            {% endif %}
+                        {% endfor %}
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        To loan money this group still needs to loan <span class="text-primary">${{invite_group.remaining}}</span> more, you current cap is <span class="text-danger">500$</span>.
+                    </div>
+                        <button class="btn btn-primary pull-right"><span class="fui-check-inverted"></span>Accept Invitation</button>
+                        <button data-dismiss="alert" class="btn btn-danger pull-left"><span class="fui-cross-inverted"></span>Reject Invitation</button>
+                        <div style="clear:both"></div>
+
+
+                </div>
+                <br />
+                {% endfor %}
+
             </div>
 
     </div>

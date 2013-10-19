@@ -28,6 +28,8 @@ def get_context():
     data = session.get('data')
     if data:
         user = User.get_or_create(email=data['email'])
+        invite_groups = user.get_invite_groups()
+
         if 'work' in data:
             employer = data['work'][0]['employer']['name']
             position = data['work'][0]['position']['name']
@@ -70,6 +72,21 @@ def profile():
         print request.form
     return render_template('profile.html', **context)
 
+@app.route("/create", methods=['POST', 'GET'])
+def create():
+    context = get_context()
+    context.update(dict(success=False))
+    user = User.get_or_create(email=context['email'])
+
+    all_users = User.get_all(exclude_user_id=user.id)
+    context.update({'all_users': list(all_users)})
+    if request.method == 'POST':
+        user = User.get_or_create(email=context['email'])
+        context = get_context()
+        context.update(dict(success=True))
+        print request.form
+    return render_template('create.html', **context)
+
 @app.route("/receipt", methods=['POST', 'GET'])
 def receipt():
     context = get_context()
@@ -91,11 +108,6 @@ def requests():
 @app.route("/")
 def index():
     context = get_context()
-    if context:
-        user = User.get_or_create(email=context['email'])
-
-        all_users = User.get_all(exclude_user_id=user.id)
-        context.update({'all_users': list(all_users)})
     return render_template('index.html', **context)
 
 @facebook.tokengetter

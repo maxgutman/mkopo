@@ -113,6 +113,13 @@ class User(CRUDMixin, Base):
     def get_user_group(self, group):
         return db.query(UserGroup).filter(UserGroup.user==self, UserGroup.group==group)
 
+    def get_invite_groups(self):
+        return db.query(InviteGroup).filter()
+
+    @property
+    def photo_url(self):
+        return 'https://graph.facebook.com/%s/picture' % self.facebook_id
+
 
 
 class Group(CRUDMixin, Base):
@@ -129,6 +136,33 @@ class Group(CRUDMixin, Base):
         return db.query(cls).filter()
 
 
+class InviteGroup(CRUDMixin, Base):
+    __tablename__ = 'invite_group'
+
+    to_user = Column(Integer, ForeignKey('user.id'))
+    from_user = Column(Integer, ForeignKey('user.id'))
+    group = Column(Integer, ForeignKey('group.id'))
+    subject = Column(String(255))
+    message = Column(String(1255))
+    remaining = Column(String(255))
+
+
+    @property
+    def _to_user(self):
+        return db.query(User).get(self.to_user)
+
+    @property
+    def _from_user(self):
+        return db.query(User).get(self.from_user)
+
+    @property
+    def _group(self):
+        return db.query(Group).get(self.group)
+
+
+    def __repr__(self):
+        return u'<to_user %r>' % self.to_user
+
 
 Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
@@ -141,6 +175,7 @@ user5 = User.get_or_create(name='Pablo Arvizu', email='parvizu@ischool.berkeley.
 
 group1 = Group.get_or_create(name='Group Loan #1')
 group2 = Group.get_or_create(name='Group Loan #2',)
+group3 = Group.get_or_create(name='Group Loan #3',)
 
 UserGroup.get_or_create(user_id=user0.id, group_id=group1.id, loan_amount='100.00', repaid_amount='100.00')
 UserGroup.get_or_create(user_id=user1.id, group_id=group1.id, loan_amount='100.00', repaid_amount='100.00')
@@ -151,5 +186,9 @@ UserGroup.get_or_create(user_id=user0.id, group_id=group2.id, loan_amount='50.00
 UserGroup.get_or_create(user_id=user4.id, group_id=group2.id, loan_amount='975.00', repaid_amount='500.00')
 UserGroup.get_or_create(user_id=user5.id, group_id=group2.id, loan_amount='525.00', repaid_amount='525.00')
 
+
+InviteGroup.get_or_create(to_user=user0.id, from_user=user1.id, group=group1.id, remaining="500.00", subject="A new bike", message="Hi Max Gutman, what's up? I really need some money to fix my bike so I can get to work tomorrow. I heard you also need some cash, so I thought we can help each other? See you soon.")
+InviteGroup.get_or_create(to_user=user0.id, from_user=user2.id, group=group2.id, remaining="400.00", subject="Fix roof", message="Hi Max Gutman, I need your help! The roof of my house needs to get repaired, but I don't have neough money right now. Please help me to get a loan so I dont have to sit in a wet room.")
+InviteGroup.get_or_create(to_user=user0.id, from_user=user3.id, group=group3.id, remaining="100.00", subject="Money for birthday", message="Yo Max Gutman, I want to throw a birthday-party, but cant afford the cake. Let's borrow some money together. You can spent it on a present for me ;)")
 
 
