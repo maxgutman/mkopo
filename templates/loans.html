@@ -17,6 +17,7 @@
 
             <div>
                 <h3>View Groups</h3><br />
+
                 {% for group in user.groups %}
                 <table class="rwd-table">
                     <tbody>
@@ -34,7 +35,7 @@
                         <tr class="odd">
                             <td colspan="2">Borrower</td>
                             <td>Repaid/Issued</td>
-                            <td></td>
+                            <td width=100></td>
                         </tr>
                         {% for n_user in group.users %}
                         <tr class="odd">
@@ -46,8 +47,17 @@
                                     <button class="btn btn-mini btn-primary">{{ n_user.name }}</button>
                                 {% endif %}
                             </td>
-                            <td width=80>200$/200$</td>
-                            <td><span class="fui-check-inverted text-primary"></span></td>
+
+                            {% set user_group = n_user.get_user_group(group) %}
+
+                            <td width=100>${{ user_group[0].repaid_amount }}/${{ user_group[0].loan_amount }}</td>
+                            <td width="100">
+                            {% if user_group[0].repaid_amount != user_group[0].loan_amount %}
+                                <span class="fui-check-inverted" style="opacity:0.2"></span>
+                            {% else %}
+                                <span class="fui-check-inverted text-primary"></span>
+                            {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
 
@@ -60,7 +70,7 @@
 &nbsp;
 
                             </td>
-                            <td width=80>800$/1300$</td>
+                            <td width=80>$1025.00/$1550.00</td>
                             <td></td>
 
 

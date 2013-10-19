@@ -65,6 +65,7 @@ user_group = Table('user_group', Base.metadata,
     Column('user_id', Integer(), ForeignKey('user.id'), nullable=False),
     Column('group_id', Integer(), ForeignKey('group.id'), nullable=False),
     Column('loan_amount', String(), default='0.0'),
+    Column('repaid_amount', String(), default='0.0'),
     Column('created', DateTime(), default=datetime.datetime.now),
 )
 
@@ -109,6 +110,10 @@ class User(CRUDMixin, Base):
     def get_all(cls, **kwargs):
         return db.query(cls).filter(User.id != kwargs.get('exclude_user_id'))
 
+    def get_user_group(self, group):
+        return db.query(UserGroup).filter(UserGroup.user==self, UserGroup.group==group)
+
+
 
 class Group(CRUDMixin, Base):
     __tablename__ = 'group'
@@ -137,14 +142,14 @@ user5 = User.get_or_create(name='Pablo Arvizu', email='parvizu@ischool.berkeley.
 group1 = Group.get_or_create(name='Group Loan #1')
 group2 = Group.get_or_create(name='Group Loan #2',)
 
-UserGroup.get_or_create(user_id=user0.id, group_id=group1.id, loan_amount='100.00')
-UserGroup.get_or_create(user_id=user1.id, group_id=group1.id, loan_amount='100.00')
-UserGroup.get_or_create(user_id=user2.id, group_id=group1.id, loan_amount='250.00')
-UserGroup.get_or_create(user_id=user3.id, group_id=group1.id, loan_amount='650.00')
+UserGroup.get_or_create(user_id=user0.id, group_id=group1.id, loan_amount='100.00', repaid_amount='100.00')
+UserGroup.get_or_create(user_id=user1.id, group_id=group1.id, loan_amount='100.00', repaid_amount='100.00')
+UserGroup.get_or_create(user_id=user2.id, group_id=group1.id, loan_amount='250.00', repaid_amount='0.00')
+UserGroup.get_or_create(user_id=user3.id, group_id=group1.id, loan_amount='650.00', repaid_amount='650.00')
 
-UserGroup.get_or_create(user_id=user0.id, group_id=group2.id, loan_amount='50.00')
-UserGroup.get_or_create(user_id=user4.id, group_id=group2.id, loan_amount='975.00')
-UserGroup.get_or_create(user_id=user5.id, group_id=group2.id, loan_amount='5250.00')
+UserGroup.get_or_create(user_id=user0.id, group_id=group2.id, loan_amount='50.00', repaid_amount='0.00')
+UserGroup.get_or_create(user_id=user4.id, group_id=group2.id, loan_amount='975.00', repaid_amount='500.00')
+UserGroup.get_or_create(user_id=user5.id, group_id=group2.id, loan_amount='525.00', repaid_amount='525.00')
 
 
 
