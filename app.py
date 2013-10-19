@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, session, request
 from flask import render_template
 from flask_oauth import OAuth
-
+from models import User
 
 SECRET_KEY = '123'
 DEBUG = True
@@ -24,15 +24,39 @@ facebook = oauth.remote_app('facebook',
     request_token_params={'scope': 'email'}
 )
 
-@app.route("/")
-def index():
+def get_context():
     data = session.get('data')
-    context = {}
     if data:
-        context.update({
+        return {
+            'email': data['email'],
             'name': data['name'],
             'photo_url': 'https://graph.facebook.com/%s/picture' % data['id'],
-        })
+        }
+    return {}
+
+
+@app.route("/loan", methods=['POST', 'GET'])
+def loan_form():
+    context = get_context()
+    print request.form
+    if request.method == 'POST':
+        loan_amount = request.form['loan_amount']
+        user = User.get_or_create(email=context['email'])
+        user.loan_amount = loan_amount
+        user.save()
+        return redirect(url_for('index'))
+    return render_template('loan_form.html', **context)
+
+@app.route("/")
+def index():
+    context = get_context()
+    if context:
+        user = User.get_or_create(email=context['email'])
+        if not user.loan_amount:
+            return redirect(url_for('loan_form'))
+
+        all_users = User.get_all(exclude_user_id=user.id)
+        context.update({'all_users': list(all_users)})
     return render_template('index.html', **context)
 
 @facebook.tokengetter
@@ -53,12 +77,20 @@ def facebook_login():
 @facebook.authorized_handler
 def facebook_authorized(resp):
     next_url = request.args.get('next') or url_for('index')
+    print 'here', next_url
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
     session['logged_in'] = True
     session['facebook_token'] = (resp['access_token'], '')
-    session['data'] = facebook.get('/me').data
+    data = facebook.get('/me').data
+    session['data'] = data
+    User.get_or_create(
+        email=data['email'],
+        name=data['name'],
+        facebook_id=data['id'],
+    )
+
     return redirect(next_url)
 
 @app.route("/logout")
