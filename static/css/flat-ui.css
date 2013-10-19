@@ -4759,7 +4759,7 @@ input.search-query {
 }
 .rwd-table td:first-child {
   padding-right: 5%;
-  width: 33%;
+  /*width: 33%;*/
 }
 .rwd-table .checkbox,
 .rwd-table .radio {

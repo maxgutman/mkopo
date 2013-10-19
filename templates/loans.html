@@ -4,7 +4,7 @@
     {% include 'header.html' %}
   </head>
   <body>
-{% set page_name = 'Loans' %}
+{% set page_name = 'View Groups' %}
 {% include 'menu.html' %}
 {% include 'sidenav.html' %}
 
@@ -16,42 +16,54 @@
     <div class="container">
 
             <div>
-                <h3>Loan Overview</h3><br />
+                <h3>View Groups</h3><br />
                 {% for group in user.groups %}
                 <table class="rwd-table">
                     <tbody>
 
-                        <div class="alert alert-success">
+<!--                         <div class="alert alert-success">
                                     <button type="button" class="close fui-cross" data-dismiss="alert"></button>
                                     <h4>This loan is ready for approval</h3>
                                     <p>Your loan will be reviewed by a local agent and approved or denied (with specifying reasons) within 7 days</p>
                                     <a href="#fakelink" class="btn btn-primary btn-wide"><i class="fui-check-inverted"></i> Submit Loan</a>
                                     <a href="#fakelink" class="btn btn-info btn-wide">Cancel</a>
                                   </div>
-                        <tr class="even">
-                            <td colspan=5><h4>{{ group.name }}</h4></td>
+ -->                        <tr class="even">
+                            <td colspan=5><h4>{{ group.name }} <span class="text-warning">Outstanding</span></h4></td>
                         </tr>
                         <tr class="odd">
-                            <td colspan=2>Total</td>
-                            <td>700$/1300$</td>
+                            <td colspan="2">Borrower</td>
+                            <td>Repaid/Issued</td>
                             <td></td>
                         </tr>
                         {% for n_user in group.users %}
                         <tr class="odd">
-                            <td width="40px">
-                                <img width="30px" src="https://graph.facebook.com/{{ n_user.facebook_id }}/picture" />
-                            </td>
-                            <td>
+                            <td colspan=2>
+                                <img width="30px" class="mrm" src="https://graph.facebook.com/{{ n_user.facebook_id }}/picture" />
                                 {% if user.id == n_user.id %}
                                     <button class="btn btn-mini disabled">{{ n_user.name }}</button>
                                 {% else %}
                                     <button class="btn btn-mini btn-primary">{{ n_user.name }}</button>
                                 {% endif %}
                             </td>
-                            <td>200$/200$</td>
+                            <td width=80>200$/200$</td>
                             <td><span class="fui-check-inverted text-primary"></span></td>
                         </tr>
                         {% endfor %}
+
+                        <tr class="odd">
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td width="250" style="text-align: right">
+                                Total&nbsp;
+&nbsp;
+
+                            </td>
+                            <td width=80>800$/1300$</td>
+                            <td></td>
+
+
                         <tr class="odd">
                             <td colspan=5 align=right>Due Date 12.12.2013</td>
                         </tr>
@@ -60,11 +72,15 @@
                     {% endfor %}
 
             </div>
-
-
-
-
-
+            <br/>
+            <a href="/"class="btn">
+                <i class="fui-arrow-left"></i>Back
+            </a>
+            <a href="/create"class="btn btn-primary pull-right">
+                <i class="fui-arrow-right"></i>Create Group
+            </a>
+            <div style="clear:both"></div>
+            <br/>
     </div>
 
 

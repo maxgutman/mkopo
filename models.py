@@ -132,6 +132,7 @@ user1 = User.get_or_create(name='Renu Bora', email='renubora@gmail.com', faceboo
 user2 = User.get_or_create(name='Tom Quast', email='tomquast89@gmail.com', facebook_id='100000179176787')
 user3 = User.get_or_create(name='Arezu Aghasey', email='arezu@berkeley.edu', facebook_id='676966868')
 user4 = User.get_or_create(name='Jenny Lo', email='jlo@ischool.berkeley.edu', facebook_id='4205393')
+user5 = User.get_or_create(name='Pablo Arvizu', email='parvizu@ischool.berkeley.edu', facebook_id='511898967')
 
 group1 = Group.get_or_create(name='Group Loan #1')
 group2 = Group.get_or_create(name='Group Loan #2',)
@@ -143,7 +144,7 @@ UserGroup.get_or_create(user_id=user3.id, group_id=group1.id, loan_amount='650.0
 
 UserGroup.get_or_create(user_id=user0.id, group_id=group2.id, loan_amount='50.00')
 UserGroup.get_or_create(user_id=user4.id, group_id=group2.id, loan_amount='975.00')
-
+UserGroup.get_or_create(user_id=user5.id, group_id=group2.id, loan_amount='5250.00')
 
 
 

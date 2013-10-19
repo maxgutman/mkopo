@@ -16,31 +16,38 @@
 
             {% if session.logged_in %}
 
-            <p>Hello {{ name }},</p>
-            <p style="clear:both">
-                You have a total of <span class="text-primary">200$</span> in loan, of which <span class="text-primary">100$</span> are due in <span class="text-danger">6</span> days.
-                <br>
-                <a href="loans" class="btn btn-primary">Loan Overview</a>
-            </p><br />
-            <p style="clear:both">
-                You have <span class="text-primary">3</span> pending loan requests.
-                <br>
-                <a href="/requests" class="btn btn-primary">See Requests</a>
-            </p><br />
-            <p style="clear:both">
-                Based on your current quota you can loan up to <span class="text-primary">440$</span>.
-                <br>
-                <a href="/create" class="btn btn-primary">Create Loan Request</a>
-            </p>
-            <div style="clear:both" ></div>
+            <img class="landing-icon-small pull-left" style="width: 64px; margin-right: 10px" src="../static/images/icons/Gift-Box_2x.png" alt="image"><h4>Your loan <span class="text-primary">#15</span> is approved!</h4>
+
+            <br /><br /><br />
+
+            <div class="alert">
+                <button type="button" class="close fui-cross" data-dismiss="alert"></button>
+                 You have a total of <span class="text-primary">200$</span> in loan, of which <span class="text-primary">100$</span> are due in <span class="text-danger">6</span> days.
+
+
+            </div>
+
+            <div class="alert">
+                <button type="button" class="close fui-cross" data-dismiss="alert"></button>
+                 You have <span class="text-primary">3</span> pending loan group invitations.
+
+
+            </div>
+
+<a href="/loans" class="btn btn-primary btn-block"><i class="mrm fui-eye"></i>View Groups</a>
+<a href="/requests" class="btn btn-primary btn-block"><i class="mrm fui-user"></i>Join Groups</a>
+<a href="/create" class="btn btn-primary btn-block"><i class="mrm fui-plus"></i>Create Groups</a>
+
+
 <br /><br />
+<!--
             <h4>Friends Needing Loans</h4>
         {% for user in all_users %}
             <img src="https://graph.facebook.com/{{ user.facebook_id }}/picture" style="float: left; padding-right: 12px" />
             <p>{{ user.name }}</p>
             <br />
         {% endfor %}
-        <br /><br />
+ -->        <br /><br />
 
     {% else %}
         <h4><b>mkopo</b> is a social group-based lending platform to help <i>individuals</i> live better lives</h4>
