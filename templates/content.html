@@ -1,0 +1,19 @@
+    <div class="container">
+
+            <img src="{{ photo_url }}" />{{ name }}
+
+            <ul class="nav pull-right">
+                {% if not session.logged_in %}
+                    <a href="/facebook_login" class="btn btn-small btn-social-facebook">
+                        <i class="fui-facebook"></i>
+                        Connect with Facebook
+                    </a>
+                {% else %}
+                    <a href="/logout" class="btn btn-small btn-social-facebook">
+                        <i class="fui-facebook"></i>
+                        Logout
+                    </a>
+                {% endif %}
+            </ul>
+
+    </div>
