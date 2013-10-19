@@ -4,44 +4,46 @@
     {% include 'header.html' %}
   </head>
   <body>
-
+{% set page_name = 'Overview' %}
 {% include 'menu.html' %}
 {% include 'sidenav.html' %}
 
-<div class="container-fluid" style="min-height: 400px">
-  <div class="row-fluid">
-    <div class="span2">
-                <img src="{{ photo_url }}" />{{ name }}
-
-                <ul class="nav pull-right">
-                    {% if not session.logged_in %}
-<!--                         <a href="/facebook_login" class="btn btn-small btn-social-facebook">
-                            <i class="fui-facebook"></i>
-                            Connect with Facebook
-                        </a> -->
-                    {% else %}
-                        <a href="/logout" class="btn btn-small btn-social-facebook">
-                            <i class="fui-facebook"></i>
-                            Logout
-                        </a>
-                    {% endif %}
-                </ul>
-
-<hr />
-
-
-    </div>
     <div class="span10">
-    {% if all_users %}
+<!--         <div class="alert alert-success">
+            <button type="button" class="close fui-cross" data-dismiss="alert"></button>
+            <h5>Successfully added to group</h5>
 
-        {% for user in all_users %}
-            <h4>{{ user.email }}</h4>
-            <h5>wants to borrow ${{ user.loan_amount}}</h5>
+          </div> -->
+
+
+    {% if session.logged_in %}
+
+            <p>Hello {{ name }},</p>
+            <p style="clear:both">
+                You have a total of <span class="text-primary">200$</span> in loan, of which <span class="text-primary">100$</span> are due in <span class="text-danger">6</span> days.
+                <br>
+                <a href="loans" class="btn btn-primary pull-right">Loan Overview</a>
+            </p><br />
+            <p style="clear:both">
+                You have <span class="text-primary">3</span> pending loan requests.
+                <br>
+                <a href="/requests" class="btn btn-primary pull-right">See Requests</a>
+            </p><br />
+            <p style="clear:both">
+                Based on your current quota you can loan up to <span class="text-primary">440$</span>.
+                <br>
+                <a href="/create" class="btn btn-primary pull-right">Create loan Request</a>
+            </p>
+
+
+<!--         {% for user in all_users %}
+            <img src="https://graph.facebook.com/{{ user.facebook_id }}/picture" style="float: left; padding-right: 12px" /><h5>{{ user.name }}</h5>
+            <h6>wants to borrow ${{ user.loan_amount}}</h6>
               <button name="submit" value="submit" class="btn btn-primary btn-wide mll">
                 <i class="fui-arrow-right"></i>
                     Add to group
                 </button>
-        {% endfor %}
+        {% endfor %} -->
     {% else %}
         <h5>Please register by clicking below</h5>
         <a href="/facebook_login" class="btn btn-small btn-social-facebook">
@@ -50,6 +52,12 @@
                         </a>
     {% endif %}
     <br /><br /><br />
+
+
+
+    </div>
+
+
     </div>
   </div>
 </div>

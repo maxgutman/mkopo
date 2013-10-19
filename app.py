@@ -27,33 +27,52 @@ facebook = oauth.remote_app('facebook',
 def get_context():
     data = session.get('data')
     if data:
+        user = User.get_or_create(email=data['email'])
         return {
-            'email': data['email'],
-            'name': data['name'],
+            'email': user.email or data['email'],
+            'name': user.name or data['name'],
+            'employer': user.employer or data['work'][0]['employer']['name'],
+            'position': user.position or data['work'][0]['position']['name'],
+            'location': user.location or data['location']['name'],
+            'bio': user.bio,
+            'data': data,
             'photo_url': 'https://graph.facebook.com/%s/picture' % data['id'],
         }
     return {}
 
 
-@app.route("/loan", methods=['POST', 'GET'])
-def loan_form():
+@app.route("/profile", methods=['POST', 'GET'])
+def profile():
     context = get_context()
-    print request.form
+    context.update(dict(success=False))
     if request.method == 'POST':
-        loan_amount = request.form['loan_amount']
         user = User.get_or_create(email=context['email'])
-        user.loan_amount = loan_amount
+        user.employer = request.form['employer']
+        user.position = request.form['position']
+        user.location = request.form['location']
+        user.bio = request.form['bio']
         user.save()
-        return redirect(url_for('index'))
-    return render_template('loan_form.html', **context)
+        context.update(dict(success=True))
+        print request.form
+    return render_template('profile.html', **context)
+
+
+@app.route("/loans", methods=['POST', 'GET'])
+def loans():
+    context = get_context()
+    return render_template('loans.html', **context)
+
+
+@app.route("/requests", methods=['POST', 'GET'])
+def requests():
+    context = get_context()
+    return render_template('requests.html', **context)
 
 @app.route("/")
 def index():
     context = get_context()
     if context:
         user = User.get_or_create(email=context['email'])
-        if not user.loan_amount:
-            return redirect(url_for('loan_form'))
 
         all_users = User.get_all(exclude_user_id=user.id)
         context.update({'all_users': list(all_users)})

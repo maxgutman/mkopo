@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'header.html' %}
+  </head>
+  <body>
+{% set page_name = 'Loans' %}
+{% include 'menu.html' %}
+{% include 'sidenav.html' %}
+
+<div class="container-fluid" style="min-height: 400px">
+  <div class="row-fluid">
+    <div class="span2">
+            <img src="{{ photo_url }}" style="float: left; padding-right: 12px" /><p style="clear: right;">{{ name }}</p>
+                <ul class="nav">
+                    {% if not session.logged_in %}
+<!--                         <a href="/facebook_login" class="btn btn-small btn-social-facebook">
+                            <i class="fui-facebook"></i>
+                            Connect with Facebook
+                        </a> -->
+                    {% else %}
+                        <a href="/logout" class="btn btn-small btn-social-facebook">
+                            <i class="fui-facebook"></i>
+                            Logout
+                        </a>
+                    {% endif %}
+                </ul>
+
+<hr />
+
+
+    </div>
+    <div class="span10">
+
+    <div class="container">
+
+            <div>
+                <h3>Loan Overview</h3><br />
+                <table class="rwd-table">
+
+                    <tbody>
+                        <tr class="even">
+                            <td colspan=5><h4>Loan #1</h4></td>
+                        </tr>
+                        <tr class="odd">
+                            <td>Total</td>
+                            <td>700$</td>
+                            <td>/</td>
+                            <td>1300$</td>
+                            <td></td>
+                        </tr>
+                        <tr class="odd">
+                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px" /><button class="btn btn-mini disabled">You</button></td>
+                            <td>200$</td>
+                            <td>/</td>
+                            <td>200$</td>
+                            <td><span class="fui-check-inverted text-primary"></span></td>
+                        </tr>
+                        <tr class="odd">
+                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini btn-primary">Peter</button></td>
+                            <td>100$</td>
+                            <td>/</td>
+                            <td>200$</td>
+                            <td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
+                        </tr>
+                        <tr class="odd">
+                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini btn-primary">John</button></td>
+                            <td>0$</td>
+                            <td>/</td>
+                            <td>300$</td>
+                            <td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
+                        </tr>
+                        <tr class="odd">
+                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini btn-primary">Claus</button></td>
+                            <td>400$</td>
+                            <td>/</td>
+                            <td>600$</td>
+                            <td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
+                        </tr>
+                        <tr class="odd">
+                            <td colspan=5 align=right>Due Date 12.12.2013</td>
+                        </tr>
+
+                    </table>
+                    <table class="rwd-table">
+
+                        <div class="alert alert-success">
+                                    <button type="button" class="close fui-cross" data-dismiss="alert"></button>
+                                    <h4>This loan is ready for approval</h3>
+                                    <p>Your loan will be reviewed by a local agent and approved or denied (with specifying reasons) within 7 days</p>
+                                    <a href="#fakelink" class="btn btn-primary btn-wide"><i class="fui-check-inverted"></i> Submit Loan</a>
+                                    <a href="#fakelink" class="btn btn-info btn-wide">Cancel</a>
+                                  </div>
+
+                        <tr class="even">
+                            <td colspan=5><h4>Loan #2</h4></td>
+                        </tr>
+                        <tr class="odd">
+                            <td>Total</td>
+                            <td>300$</td>
+                            <td>/</td>
+                            <td>400$</td>
+                            <td></td>
+                        </tr>
+                        <tr class="odd">
+                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini disabled">You</button></td>
+                            <td>100$</td>
+                            <td>/</td>
+                            <td>200$</td>
+                            <td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
+                        </tr>
+                        <tr class="odd">
+                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini btn-primary">Kim</button></td>
+                            <td>200$</td>
+                            <td>/</td>
+                            <td>200$</td>
+                            <td><span class="fui-check-inverted text-primary"></span></td>
+                        </tr>
+                        <tr class="odd">
+                            <td colspan=5 align=right>Due Date 01.05.2014</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+    </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+{% include 'footer.html' %}
+  </body>
+</html>

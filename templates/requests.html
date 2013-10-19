@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'header.html' %}
+  </head>
+  <body>
+{% set page_name = 'Requests' %}
+{% include 'menu.html' %}
+{% include 'sidenav.html' %}
+
+<div class="container-fluid" style="min-height: 400px">
+    <div class="span10">
+             <div>
+                <h3>Request Overview</h3>
+                <table class="rwd-table">
+
+                        <tr class="odd">
+                            <td>
+                                <h4>A new bike</h4>
+                                <div class="pull-left"><img width="100px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><h3>Alex</h3></div>
+                                <p>Hi {{ name }}, what's up? I really need some money to fix my bike so I can get to work tomorrow. I heard you also need some cash, so I thought we can help each other?<br>See you soon.</p>
+                                <div>
+                                    <h5>People in group:</h5>
+                                    <button class="btn btn-mini btn-primary">Alex: 300$</button> <button class="btn btn-mini btn-primary">Susann: 200$</button> <button class="btn btn-mini btn-primary">Rolf: 400$</button>
+                                </div>
+                                <div>
+                                    To loan money this group still needs to loan <span class="text-primary">500$</span> more, you current cap is <span class="text-danger">440$</span>.
+                                </div>
+                                <div class="pull-right"><button class="btn btn-primary"><span class="fui-check-inverted"></span>loan</button> <button class="btn btn-danger"><span class="fui-cross-inverted"></span>reject</button></div>
+                            </td>
+                        </tr>
+                        <tr class="even">
+                            <td>
+                                <h4>Fix roof</h4>
+                                <div class="pull-left"><img width="100px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><h3>Claus</h3></div>
+                                <p>Hi {{ name }}, I need your help! The roof of my house needs to get repaired, but I don't have neough money right now. Please help me to get a loan so I dont have to sit in a wet room.</p>
+                                <div>
+                                    <h5>People in group:</h5>
+                                    <button class="btn btn-mini btn-primary">Claus: 800$</button> <button class="btn btn-mini btn-primary">Lisa: 100$</button>
+                                </div>
+                                <div>
+                                    To loan money this group still needs to loan <span class="text-primary">200$</span> more, you current cap is <span class="text-primary">440$</span>.
+                                </div>
+                                <div class="pull-right"><button class="btn btn-primary"><span class="fui-check-inverted"></span>loan</button> <button class="btn btn-danger"><span class="fui-cross-inverted"></span>reject</button></div>
+                            </td>
+                        </tr>
+                        <tr class="odd">
+                            <td>
+                                <h4>Money for birthday</h4>
+                                <div class="pull-left"><img width="100px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><h3>Elsa</h3></div>
+                                <p>Yo {{ name }}, I want to throw a birthday-party, but cant afford the cake. Let's borrow some money together. You can spent it on a present for me ;)</p>
+                                <div>
+                                    <h5>People in group:</h5>
+                                    <button class="btn btn-mini btn-primary">Elsa: 200$</button>
+                                </div>
+                                <div>
+                                    To loan money this group still needs to loan <span class="text-primary">700$</span> more, you current cap is <span class="text-danger">440$</span>.
+                                </div>
+                                <div class="pull-right"><button class="btn btn-primary"><span class="fui-check-inverted"></span>loan</button> <button class="btn btn-danger"><span class="fui-cross-inverted"></span>reject</button></div>
+                            </td>
+                        </tr>
+                </table>
+            </div>
+
+    </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+{% include 'footer.html' %}
+  </body>
+</html>

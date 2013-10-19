@@ -81,7 +81,10 @@ class User(CRUDMixin, Base):
 
     email = Column(String(255), unique=True)
     name = Column(String(255))
-    loan_amount = Column(String(255))
+    employer = Column(String(255))
+    position = Column(String(255))
+    location = Column(String(255))
+    bio = Column(String(1255))
     facebook_id = Column(BigInteger(20, unsigned=True))
     groups = relation('Group', primaryjoin='User.id==UserGroup.user_id', secondary=UserGroup.__table__, secondaryjoin='UserGroup.group_id==Group.id')
 
@@ -118,4 +121,5 @@ class Group(CRUDMixin, Base):
         return u'<Group %r>' % self.name
 
 
+#Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)

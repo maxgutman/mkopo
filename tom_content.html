@@ -1,0 +1,180 @@
+    <div class="container">
+			{% if not session.logged_in %}
+			<div class="nav pull-right">
+				<a href="/facebook_login" class="btn btn-small btn-social-facebook">
+            		<span class="fui-facebook"></span>Connect with Facebook
+            	</a>
+            </div>
+			{% else %}
+            <p>Hello {{ name }}</p>
+            <p style="clear:both">
+            	You have a total of <span class="text-primary">200$</span> in loan, of which <span class="text-primary">100$</span> are due in <span class="text-danger">6</span> days.
+            	<br>
+            	<button class="btn btn-primary pull-right">Loan Overview</button>
+            </p>
+            <p style="clear:both">
+            	You have <span class="text-primary">3</span> pending loan requests.
+            	<br>
+            	<button class="btn btn-primary pull-right">See Requests</button>
+            </p>
+            <p style="clear:both">
+            	Based on your current quota you can loan up to <span class="text-primary">440$</span>.
+            	<br>
+            	<button class="btn btn-primary pull-right">Create loan Request</button>
+            </p>
+            
+            
+            <div>
+        		<h3>Loan Overview</h3>
+        		<table class="rwd-table">
+        			<tbody>
+        				<tr class="odd">
+        					<td>Loan</td>
+        					<td>#1</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        				</tr>
+        				<tr class="odd">
+        					<td>Total</td>
+        					<td>700$</td>
+        					<td>/</td>
+        					<td>1300$</td>
+        					<td></td>
+        				</tr>
+        				<tr class="odd">
+        					<td><img width="30px" src="{{ photo_url }}" /><button class="btn btn-mini disabled">You</button></td>
+        					<td>200$</td>
+        					<td>/</td>
+        					<td>200$</td>
+        					<td><span class="fui-check-inverted text-primary"></span></td>
+        				</tr>
+        				<tr class="odd">
+        					<td><img width="30px" src="{{ photo_url }}" /><button class="btn btn-mini btn-primary">Peter</button></td>
+        					<td>100$</td>
+        					<td>/</td>
+        					<td>200$</td>
+        					<td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
+        				</tr>
+        				<tr class="odd">
+        					<td><img width="30px" src="{{ photo_url }}" /><button class="btn btn-mini btn-primary">John</button></td>
+        					<td>0$</td>
+        					<td>/</td>
+        					<td>300$</td>
+        					<td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
+        				</tr>
+        				<tr class="odd">
+        					<td><img width="30px" src="{{ photo_url }}" /><button class="btn btn-mini btn-primary">Claus</button></td>
+        					<td>400$</td>
+        					<td>/</td>
+        					<td>600$</td>
+        					<td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
+        				</tr>
+        				<tr class="odd">
+        					<td>Due Date</td>
+        					<td>12.12.2013</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        				</tr>
+        				<tr class="even">
+        					<td>Loan</td>
+        					<td>#2</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        				</tr>
+        				<tr class="even">
+        					<td>Total</td>
+        					<td>300$</td>
+        					<td>/</td>
+        					<td>400$</td>
+        					<td></td>
+        				</tr>
+        				<tr class="even">
+        					<td><img width="30px" src="{{ photo_url }}" /><button class="btn btn-mini disabled">You</button></td>
+        					<td>100$</td>
+        					<td>/</td>
+        					<td>200$</td>
+        					<td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
+        				</tr>
+        				<tr class="even">
+        					<td><img width="30px" src="{{ photo_url }}" /><button class="btn btn-mini btn-primary">Kim</button></td>
+        					<td>200$</td>
+        					<td>/</td>
+        					<td>200$</td>
+        					<td><span class="fui-check-inverted text-primary"></span></td>
+        				</tr>
+        				<tr class="even">
+        					<td>Due Date</td>
+        					<td>12.12.2013</td>
+        					<td></td>
+        					<td></td>
+        					<td></td>
+        				</tr>
+        			</tbody>
+        		</table>
+      		</div>
+      		
+      		 <div>
+        		<h3>Request Overview</h3>
+        		<table class="rwd-table">
+
+        				<tr class="odd">
+        					<td>
+        						<h4>A new bike</h4>
+        						<div class="pull-left"><img width="100px" src="{{ photo_url }}"/><br>Alex</div>
+        						<p>Hi {{ name }}, what's up? I really need some money to fix my bike so I can get to work tomorrow. I heard you also need some cash, so I thought we can help each other?<br>See you soon.</p>
+        						<div>
+        							<h5>People in group:</h5>
+        							<button class="btn btn-mini btn-primary">Alex: 300$</button> <button class="btn btn-mini btn-primary">Susann: 200$</button> <button class="btn btn-mini btn-primary">Rolf: 400$</button>
+        						</div>
+        						<div>
+        							To loan money this group still needs to loan <span class="text-primary">500$</span> more, you current cap is <span class="text-danger">440$</span>.
+        						</div>
+        						<div class="pull-right"><button class="btn btn-primary"><span class="fui-check-inverted"></span>loan</button> <button class="btn btn-primary"><span class="fui-cross-inverted"></span>reject</button></div>
+        					</td>
+        				</tr>
+        				<tr class="even">
+        					<td>
+        						<h4>Fix roof</h4>
+        						<div class="pull-left"><img width="100px" src="{{ photo_url }}"/><br>Claus</div>
+        						<p>Hi {{ name }}, I need your help! The roof of my house needs to get repaired, but I don't have neough money right now. Please help me to get a loan so I dont have to sit in a wet room.</p>
+        						<div>
+        							<h5>People in group:</h5>
+        							<button class="btn btn-mini btn-primary">Claus: 800$</button> <button class="btn btn-mini btn-primary">Lisa: 100$</button>
+        						</div>
+        						<div>
+        							To loan money this group still needs to loan <span class="text-primary">200$</span> more, you current cap is <span class="text-primary">440$</span>.
+        						</div>
+        						<div class="pull-right"><button class="btn btn-primary"><span class="fui-check-inverted"></span>loan</button> <button class="btn btn-primary"><span class="fui-cross-inverted"></span>reject</button></div>
+        					</td>
+        				</tr>
+        				<tr class="odd">
+        					<td>
+        						<h4>Money for birthday</h4>
+        						<div class="pull-left"><img width="100px" src="{{ photo_url }}"/><br>Elsa</div>
+        						<p>Yo {{ name }}, I want to throw a birthday-party, but cant afford the cake. Let's borrow some money together. You can spent it on a present for me ;)</p>
+        						<div>
+        							<h5>People in group:</h5>
+        							<button class="btn btn-mini btn-primary">Elsa: 200$</button>
+        						</div>
+        						<div>
+        							To loan money this group still needs to loan <span class="text-primary">700$</span> more, you current cap is <span class="text-danger">440$</span>.
+        						</div>
+        						<div class="pull-right"><button class="btn btn-primary"><span class="fui-check-inverted"></span>loan</button> <button class="btn btn-primary"><span class="fui-cross-inverted"></span>reject</button></div>
+        					</td>
+        				</tr>
+        		</table>
+      		</div>
+            
+            <ul class="nav pull-right">
+                	<br>
+                    <a href="/logout" class="btn btn-small btn-social-facebook">
+                        <i class="fui-facebook"></i>
+                        Logout
+                    </a>
+                {% endif %}
+            </ul>
+
+    </div>
