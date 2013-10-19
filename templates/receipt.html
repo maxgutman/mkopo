@@ -14,7 +14,11 @@
     <div class="span10">
 
     <div class="container">
-    	
+    	<h3>Your receipt</h3>
+    	<figure>
+		    <h2>Your location</h2>
+		    <div style="height: 200px;" id="map-user"></div>
+		</figure>
     </div>
 
 
@@ -22,8 +26,8 @@
   </div>
 </div>
 
-
-
 {% include 'footer.html' %}
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+  <script src="static/js/custom_maps.js"></script>
   </body>
 </html>
