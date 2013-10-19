@@ -70,6 +70,12 @@ def profile():
         print request.form
     return render_template('profile.html', **context)
 
+@app.route("/receipt", methods=['POST', 'GET'])
+def receipt():
+    context = get_context()
+    context.update(dict(success=False))
+    return render_template('receipt.html', **context)
+
 
 @app.route("/loans", methods=['POST', 'GET'])
 def loans():
