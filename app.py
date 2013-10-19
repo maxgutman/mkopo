@@ -28,13 +28,25 @@ def get_context():
     data = session.get('data')
     if data:
         user = User.get_or_create(email=data['email'])
+        if 'work' in data:
+            employer = data['work'][0]['employer']['name']
+            position = data['work'][0]['position']['name']
+        else:
+            employer = user.employer
+            position = user.position
+
+        if 'location' in data:
+            location = data['location']['name']
+        else:
+            location = user.location
+
         return {
             'user': user,
             'email': user.email or data['email'],
             'name': user.name or data['name'],
-            'employer': user.employer or data['work'][0]['employer']['name'],
-            'position': user.position or data['work'][0]['position']['name'],
-            'location': user.location or data['location']['name'],
+            'employer': employer,
+            'position': position,
+            'location': location,
             'bio': user.bio,
             'data': data,
             'photo_url': 'https://graph.facebook.com/%s/picture' % data['id'],
