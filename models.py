@@ -64,6 +64,7 @@ user_group = Table('user_group', Base.metadata,
     Column('id', Integer(), primary_key=True, nullable=False),
     Column('user_id', Integer(), ForeignKey('user.id'), nullable=False),
     Column('group_id', Integer(), ForeignKey('group.id'), nullable=False),
+    Column('loan_amount', String(), default='0.0'),
     Column('created', DateTime(), default=datetime.datetime.now),
 )
 
@@ -113,18 +114,36 @@ class Group(CRUDMixin, Base):
     __tablename__ = 'group'
 
     name = Column(String(255))
-    domain = Column(String(255))
-
     users = relation('User', primaryjoin='Group.id==UserGroup.group_id', secondary=UserGroup.__table__, secondaryjoin='UserGroup.user_id==User.id')
 
     def __repr__(self):
         return u'<Group %r>' % self.name
 
+    @classmethod
+    def get_all(cls, **kwargs):
+        return db.query(cls).filter()
+
+
 
 Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
+user0 = User.get_or_create(name='Max Gutman', email='jiggy361@gmail.com', facebook_id='6706834')
 user1 = User.get_or_create(name='Renu Bora', email='renubora@gmail.com', facebook_id='764632058')
 user2 = User.get_or_create(name='Tom Quast', email='tomquast89@gmail.com', facebook_id='100000179176787')
 user3 = User.get_or_create(name='Arezu Aghasey', email='arezu@berkeley.edu', facebook_id='676966868')
 user4 = User.get_or_create(name='Jenny Lo', email='jlo@ischool.berkeley.edu', facebook_id='4205393')
+
+group1 = Group.get_or_create(name='Group Loan #1')
+group2 = Group.get_or_create(name='Group Loan #2',)
+
+UserGroup.get_or_create(user_id=user0.id, group_id=group1.id, loan_amount='100.00')
+UserGroup.get_or_create(user_id=user1.id, group_id=group1.id, loan_amount='100.00')
+UserGroup.get_or_create(user_id=user2.id, group_id=group1.id, loan_amount='250.00')
+UserGroup.get_or_create(user_id=user3.id, group_id=group1.id, loan_amount='650.00')
+
+UserGroup.get_or_create(user_id=user0.id, group_id=group2.id, loan_amount='50.00')
+UserGroup.get_or_create(user_id=user4.id, group_id=group2.id, loan_amount='975.00')
+
+
+
 

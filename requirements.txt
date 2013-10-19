@@ -1,5 +1,7 @@
 Flask==0.10.1
 Flask-OAuth==0.12
+Flask-SQLAlchemy==0.15
+SQLAlchemy==0.7.6
 Jinja2==2.7.1
 MarkupSafe==0.18
 Werkzeug==0.9.4

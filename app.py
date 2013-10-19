@@ -29,6 +29,7 @@ def get_context():
     if data:
         user = User.get_or_create(email=data['email'])
         return {
+            'user': user,
             'email': user.email or data['email'],
             'name': user.name or data['name'],
             'employer': user.employer or data['work'][0]['employer']['name'],
@@ -52,6 +53,7 @@ def profile():
         user.location = request.form['location']
         user.bio = request.form['bio']
         user.save()
+        context = get_context()
         context.update(dict(success=True))
         print request.form
     return render_template('profile.html', **context)
@@ -96,7 +98,6 @@ def facebook_login():
 @facebook.authorized_handler
 def facebook_authorized(resp):
     next_url = request.args.get('next') or url_for('index')
-    print 'here', next_url
     if resp is None or 'access_token' not in resp:
         return redirect(next_url)
 
@@ -109,8 +110,7 @@ def facebook_authorized(resp):
         name=data['name'],
         facebook_id=data['id'],
     )
-
-    return redirect(next_url)
+    return redirect(url_for('index'))
 
 @app.route("/logout")
 def logout():

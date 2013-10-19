@@ -17,53 +17,9 @@
 
             <div>
                 <h3>Loan Overview</h3><br />
+                {% for group in user.groups %}
                 <table class="rwd-table">
-
                     <tbody>
-                        <tr class="even">
-                            <td colspan=5><h4>Loan #1</h4></td>
-                        </tr>
-                        <tr class="odd">
-                            <td>Total</td>
-                            <td>700$</td>
-                            <td>/</td>
-                            <td>1300$</td>
-                            <td></td>
-                        </tr>
-                        <tr class="odd">
-                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px" /><button class="btn btn-mini disabled">You</button></td>
-                            <td>200$</td>
-                            <td>/</td>
-                            <td>200$</td>
-                            <td><span class="fui-check-inverted text-primary"></span></td>
-                        </tr>
-                        <tr class="odd">
-                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini btn-primary">Peter</button></td>
-                            <td>100$</td>
-                            <td>/</td>
-                            <td>200$</td>
-                            <td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
-                        </tr>
-                        <tr class="odd">
-                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini btn-primary">John</button></td>
-                            <td>0$</td>
-                            <td>/</td>
-                            <td>300$</td>
-                            <td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
-                        </tr>
-                        <tr class="odd">
-                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini btn-primary">Claus</button></td>
-                            <td>400$</td>
-                            <td>/</td>
-                            <td>600$</td>
-                            <td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
-                        </tr>
-                        <tr class="odd">
-                            <td colspan=5 align=right>Due Date 12.12.2013</td>
-                        </tr>
-
-                    </table>
-                    <table class="rwd-table">
 
                         <div class="alert alert-success">
                                     <button type="button" class="close fui-cross" data-dismiss="alert"></button>
@@ -72,36 +28,37 @@
                                     <a href="#fakelink" class="btn btn-primary btn-wide"><i class="fui-check-inverted"></i> Submit Loan</a>
                                     <a href="#fakelink" class="btn btn-info btn-wide">Cancel</a>
                                   </div>
-
                         <tr class="even">
-                            <td colspan=5><h4>Loan #2</h4></td>
+                            <td colspan=5><h4>{{ group.name }}</h4></td>
                         </tr>
                         <tr class="odd">
-                            <td>Total</td>
-                            <td>300$</td>
-                            <td>/</td>
-                            <td>400$</td>
+                            <td colspan=2>Total</td>
+                            <td>700$/1300$</td>
                             <td></td>
                         </tr>
+                        {% for n_user in group.users %}
                         <tr class="odd">
-                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini disabled">You</button></td>
-                            <td>100$</td>
-                            <td>/</td>
-                            <td>200$</td>
-                            <td><span class="fui-check-inverted" style="opacity:0.2"></span></td>
-                        </tr>
-                        <tr class="odd">
-                            <td><img width="30px" src="{{ photo_url }}" style="float: left; padding-right: 12px"/><button class="btn btn-mini btn-primary">Kim</button></td>
-                            <td>200$</td>
-                            <td>/</td>
-                            <td>200$</td>
+                            <td width="40px">
+                                <img width="30px" src="https://graph.facebook.com/{{ n_user.facebook_id }}/picture" />
+                            </td>
+                            <td>
+                                {% if user.id == n_user.id %}
+                                    <button class="btn btn-mini disabled">{{ n_user.name }}</button>
+                                {% else %}
+                                    <button class="btn btn-mini btn-primary">{{ n_user.name }}</button>
+                                {% endif %}
+                            </td>
+                            <td>200$/200$</td>
                             <td><span class="fui-check-inverted text-primary"></span></td>
                         </tr>
+                        {% endfor %}
                         <tr class="odd">
-                            <td colspan=5 align=right>Due Date 01.05.2014</td>
+                            <td colspan=5 align=right>Due Date 12.12.2013</td>
                         </tr>
-                    </tbody>
-                </table>
+
+                    </table>
+                    {% endfor %}
+
             </div>
 
 
