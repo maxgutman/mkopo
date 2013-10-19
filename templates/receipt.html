@@ -4,7 +4,7 @@
     {% include 'header.html' %}
   </head>
   <body>
-{% set page_name = 'View Groups' %}
+{% set page_name = 'Receipt' %}
 {% include 'menu.html' %}
 {% include 'sidenav.html' %}
 
@@ -15,8 +15,17 @@
 
     <div class="container">
     	<h3>Your receipt</h3>
+    	<br>
+    	<div class="dialog dialog-success">
+    		<img class="mrm pull-left" style="width:50px;" src="static/images/icons/Money_2x.png" alt="money_img">
+    		Your group-loan has been <span class="text-primary">approved</span>. You can borrow <span class="text-primary">200$</span> now. 
+    	</div>
+    	<div style="text-align:center">
+    		<img src="https://chart.googleapis.com/chart?chs=100x100&amp;cht=qr&amp;chl=THISISATEST&amp;choe=UTF-8" alt="QR code">
+    	</div>
+    	<div style="clear:both"></div>
     	<figure>
-		    <h2>Your location</h2>
+		    <h4>Your location</h4>
 		    <div style="height: 200px;" id="map-user"></div>
 		</figure>
     </div>
