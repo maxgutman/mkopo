@@ -36,9 +36,9 @@
 {% if success %}
                     <div class="alert alert-warning">
                                     <button type="button" class="close fui-cross" data-dismiss="alert"></button>
-                                    <p>Your profile has been updated!</p>
+                                    <p>You have created a new group called!</p>
               <a href="/"><button type="submit" class="btn btn-large">
-                <i class="fui-arrow-right"></i>Back Home
+                <i class="fui-arrow-left"></i>Back Home
                 </button></a>
                                   </div>
 {% endif %}
@@ -55,7 +55,7 @@
     <div class="col-lg-10">
 
         {% for user in all_users %}
-            <a class="btn btn-mini btn-default mrm mlm" style="margin: 4px">
+            <a class="btn" style="margin: 4px">
             <img src="https://graph.facebook.com/{{ user.facebook_id }}/picture" style="width: 24px" />
               <!-- <i class="fui-check-inverted"></i> -->
               {{ user.name }}

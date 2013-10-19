@@ -77,14 +77,10 @@ def create():
     context = get_context()
     context.update(dict(success=False))
     user = User.get_or_create(email=context['email'])
-
     all_users = User.get_all(exclude_user_id=user.id)
     context.update({'all_users': list(all_users)})
     if request.method == 'POST':
-        user = User.get_or_create(email=context['email'])
-        context = get_context()
         context.update(dict(success=True))
-        print request.form
     return render_template('create.html', **context)
 
 @app.route("/receipt", methods=['POST', 'GET'])
