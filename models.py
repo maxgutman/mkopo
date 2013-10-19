@@ -121,5 +121,10 @@ class Group(CRUDMixin, Base):
         return u'<Group %r>' % self.name
 
 
-#Base.metadata.drop_all(bind=engine)
+Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
+user1 = User.get_or_create(name='Renu Bora', email='renubora@gmail.com', facebook_id='764632058')
+user2 = User.get_or_create(name='Tom Quast', email='tomquast89@gmail.com', facebook_id='100000179176787')
+user3 = User.get_or_create(name='Arezu Aghasey', email='arezu@berkeley.edu', facebook_id='676966868')
+user4 = User.get_or_create(name='Jenny Lo', email='jlo@ischool.berkeley.edu', facebook_id='4205393')
+
