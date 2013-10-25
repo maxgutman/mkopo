@@ -127,6 +127,7 @@ class Group(CRUDMixin, Base):
 
     name = Column(String(255))
     users = relation('User', primaryjoin='Group.id==UserGroup.group_id', secondary=UserGroup.__table__, secondaryjoin='UserGroup.user_id==User.id')
+    status = Column(String(255))
 
     def __repr__(self):
         return u'<Group %r>' % self.name
@@ -173,22 +174,22 @@ user3 = User.get_or_create(name='Arezu Aghasey', email='arezu@berkeley.edu', fac
 user4 = User.get_or_create(name='Jenny Lo', email='jlo@ischool.berkeley.edu', facebook_id='4205393')
 user5 = User.get_or_create(name='Pablo Arvizu', email='parvizu@ischool.berkeley.edu', facebook_id='511898967')
 
-group1 = Group.get_or_create(name='Group Loan #1')
-group2 = Group.get_or_create(name='Group Loan #2',)
-group3 = Group.get_or_create(name='Group Loan #3',)
+group1 = Group.get_or_create(name='Group Loan #1', status="Outstanding")
+group2 = Group.get_or_create(name='Group Loan #2', status="Completed")
+group3 = Group.get_or_create(name='Group Loan #3', status="Outstanding")
 
-UserGroup.get_or_create(user_id=user0.id, group_id=group1.id, loan_amount='100.00', repaid_amount='100.00')
-UserGroup.get_or_create(user_id=user1.id, group_id=group1.id, loan_amount='100.00', repaid_amount='100.00')
-UserGroup.get_or_create(user_id=user2.id, group_id=group1.id, loan_amount='250.00', repaid_amount='0.00')
-UserGroup.get_or_create(user_id=user3.id, group_id=group1.id, loan_amount='650.00', repaid_amount='650.00')
+UserGroup.get_or_create(user_id=user0.id, group_id=group1.id, loan_amount='100', repaid_amount='100')
+UserGroup.get_or_create(user_id=user1.id, group_id=group1.id, loan_amount='75', repaid_amount='75')
+UserGroup.get_or_create(user_id=user2.id, group_id=group1.id, loan_amount='250', repaid_amount='0')
+UserGroup.get_or_create(user_id=user3.id, group_id=group1.id, loan_amount='650', repaid_amount='650')
 
-UserGroup.get_or_create(user_id=user0.id, group_id=group2.id, loan_amount='50.00', repaid_amount='0.00')
-UserGroup.get_or_create(user_id=user4.id, group_id=group2.id, loan_amount='975.00', repaid_amount='500.00')
-UserGroup.get_or_create(user_id=user5.id, group_id=group2.id, loan_amount='525.00', repaid_amount='525.00')
+UserGroup.get_or_create(user_id=user0.id, group_id=group2.id, loan_amount='50', repaid_amount='50')
+UserGroup.get_or_create(user_id=user4.id, group_id=group2.id, loan_amount='975', repaid_amount='975')
+UserGroup.get_or_create(user_id=user5.id, group_id=group2.id, loan_amount='525', repaid_amount='525')
 
 
-InviteGroup.get_or_create(to_user=user0.id, from_user=user1.id, group=group1.id, remaining="500.00", subject="A new bike", message="Hi Max Gutman, what's up? I really need some money to fix my bike so I can get to work tomorrow. I heard you also need some cash, so I thought we can help each other? See you soon.")
-InviteGroup.get_or_create(to_user=user0.id, from_user=user2.id, group=group2.id, remaining="400.00", subject="Fix roof", message="Hi Max Gutman, I need your help! The roof of my house needs to get repaired, but I don't have neough money right now. Please help me to get a loan so I dont have to sit in a wet room.")
-InviteGroup.get_or_create(to_user=user0.id, from_user=user3.id, group=group3.id, remaining="100.00", subject="Money for birthday", message="Yo Max Gutman, I want to throw a birthday-party, but cant afford the cake. Let's borrow some money together. You can spent it on a present for me ;)")
+InviteGroup.get_or_create(to_user=user0.id, from_user=user1.id, group=group1.id, remaining="500", subject="$ for transport", message="Hi Max Gutman, what's up? I really need some money to fix my bike so I can get to work tomorrow. I heard you also need some cash, so I thought we can help each other? See you soon.")
+InviteGroup.get_or_create(to_user=user0.id, from_user=user2.id, group=group2.id, remaining="400", subject="Fix roof", message="Hi Max Gutman, I need your help! The roof of my house needs to get repaired, but I don't have neough money right now. Please help me to get a loan so I dont have to sit in a wet room.")
+InviteGroup.get_or_create(to_user=user0.id, from_user=user3.id, group=group3.id, remaining="100", subject="Money for birthday", message="Yo Max Gutman, I want to throw a birthday-party, but cant afford the cake. Let's borrow some money together. You can spent it on a present for me ;)")
 
 

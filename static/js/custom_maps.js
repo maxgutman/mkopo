@@ -14,13 +14,13 @@ $(document).ready(function() {
 
 	// first, see if you can get the user's geo-location
     if (navigator.geolocation) {
-		
+
 		var options = {
 		  enableHighAccuracy: true,
 		  timeout: 5000,
 		  maximumAge: 0
 		};
-		
+
 		function success(data){
 			var latitude = data.coords.latitude;
 			var longitude = data.coords.longitude;
@@ -31,25 +31,25 @@ $(document).ready(function() {
 				title: ''
 			});
 			var marker2 = new google.maps.Marker({
-				position: new google.maps.LatLng(37.871127,-122.261703),
+				position: new google.maps.LatLng(37.786004,-122.409193),
 				map: map,
-				icon: 'https://cdn1.iconfinder.com/data/icons/SUPERVISTA/accounting/png/32/bank.png',
+				icon: 'http://www.umb.edu/editor_uploads/maps-icons/ATM_icon.png',
 				title: ''
 			});
 			var marker3 = new google.maps.Marker({
-				position: new google.maps.LatLng(37.867807,-122.251489),
+				position: new google.maps.LatLng(37.787149,-122.409897),
 				map: map,
-				icon: 'https://cdn1.iconfinder.com/data/icons/SUPERVISTA/accounting/png/32/bank.png',
+				icon: 'http://www.umb.edu/editor_uploads/maps-icons/ATM_icon.png',
 				title: ''
 			});
 			var infowindow = new google.maps.InfoWindow({
 				content: "You are here"
 			});
 			var infowindow2 = new google.maps.InfoWindow({
-				content: "Get money from Peter"
+				content: "Pick up your Visa from this location"
 			});
 			var infowindow3 = new google.maps.InfoWindow({
-				content: "Get money from John"
+				content: "Pick up your Visa from this location"
 			});
 			google.maps.event.addListener(marker, 'click', function() {
 				infowindow.open(map,marker);

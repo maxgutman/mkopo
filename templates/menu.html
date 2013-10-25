@@ -28,15 +28,15 @@
 {% if session.logged_in %}
 <div class="container-fluid" style="margin-bottom: 0">
 
-    <div style="width: 220px;" class="pull-left"><img src="{{ photo_url }}" style="width: 32px; float: left; padding-right: 12px" /><p>{{ name }}</p></div>
+    <div style="width: 180px;" class="pull-left"><img src="{{ photo_url }}" style="width: 32px; float: left; padding-right: 12px" /><p>{{ name }}</p></div>
     <div class="pull-right">
-    <a href="/profile" class="btn btn-small" style="padding: 6px">
+    <a href="/profile" class="btn btn-small btn-default" style="padding: 6px">
         <i class="fui-user"></i>
-        Profile
+
     </a>
     <a href="/logout" class="btn btn-small btn-social-facebook" style="padding: 6px">
-        <i class="fui-facebook"></i>
-        Logout
+        <i class="fui-exit"></i>
+        Exit
     </a></div>
 
 </div>

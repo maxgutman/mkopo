@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, session, request
 from flask import render_template
 from flask_oauth import OAuth
-from models import User
+from models import User, Group, UserGroup
 
 SECRET_KEY = '123'
 DEBUG = True
@@ -80,6 +80,22 @@ def create():
     all_users = User.get_all(exclude_user_id=user.id)
     context.update({'all_users': list(all_users)})
     if request.method == 'POST':
+        group = Group.get_or_create(name=request.form['group_name'], status='Pending')
+        UserGroup.get_or_create(
+            user_id=user.id,
+            group_id=group.id,
+            loan_amount=request.form['loan_amount'],
+            repaid_amount='0',
+        )
+        all_users = User.get_all(exclude_user_id=user.id)
+        for _user in all_users:
+            UserGroup.get_or_create(
+                user_id=_user.id,
+                group_id=group.id,
+                loan_amount='0',
+                repaid_amount='0',
+            )
+
         context.update(dict(success=True))
     return render_template('create.html', **context)
 
@@ -105,6 +121,10 @@ def requests():
 def index():
     context = get_context()
     return render_template('index.html', **context)
+
+@app.route("/iframe")
+def iframe():
+    return render_template('iframe.html')
 
 @facebook.tokengetter
 def get_facebook_token():
